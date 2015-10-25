@@ -12,7 +12,7 @@ namespace MonadDemoTests
         [Test]
         public void TaskMapTrivial()
         {
-            var t1 = 5.Return();
+            var t1 = TaskMonad.Return(5);
             var t2 = t1.Map(Convert.ToString);
             Assert.That(t2.Result, Is.EqualTo("5"));
         }
@@ -104,7 +104,6 @@ namespace MonadDemoTests
                     break;
                 }
             }
-            cancellationTokenSource.Cancel();
             var ex = Assert.Throws<AggregateException>(() => t2.Wait(CancellationToken.None));
             Assert.That(ex.InnerException, Is.Not.Null);
             Assert.That(ex.InnerException, Is.InstanceOf<TaskCanceledException>());
@@ -117,7 +116,7 @@ namespace MonadDemoTests
         public void TaskFlatMapTrivial()
         {
             var t1 = Task.FromResult(5);
-            var t2 = t1.FlatMap(n => Convert.ToString(n).Return());
+            var t2 = t1.FlatMap(n => TaskMonad.Return(Convert.ToString(n)));
             Assert.That(t2.Result, Is.EqualTo("5"));
         }
 
@@ -129,12 +128,21 @@ namespace MonadDemoTests
                 MimicRealisticProcessing();
                 return 5;
             });
-            var t2 = t1.FlatMap(n => Convert.ToString(n).Return());
+            var t2 = t1.FlatMap(n => TaskMonad.Return(Convert.ToString(n)));
             Assert.That(t2.Result, Is.EqualTo("5"));
         }
 
         // TODO: FlatMap/exception
         // TODO: FlatMap/cancellation
+
+        [Test]
+        public void UsingMapToTryToMimicFlatMap()
+        {
+            var t1 = TaskMonad.Return(5);
+            var t2 = t1.Map(n => TaskMonad.Return(Convert.ToString(n)));
+            // t2 is Task<Task<string>> instead of Task<string>.
+            Assert.That(t2.Result.Result, Is.EqualTo("5"));
+        }
 
         [Test]
         public void TaskSelect()

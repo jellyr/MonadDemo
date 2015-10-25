@@ -5,7 +5,7 @@ namespace MonadDemo
 {
     public static class TaskMonad
     {
-        public static Task<T> Return<T>(this T t)
+        public static Task<T> Return<T>(T t)
         {
             return Task.FromResult(t);
         }
