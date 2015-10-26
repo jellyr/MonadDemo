@@ -10,6 +10,13 @@ namespace MonadDemoTests
     public class TaskMonadTests
     {
         [Test]
+        public void Return()
+        {
+            var m = TaskMonad.Return(5);
+            Assert.That(m.Result, Is.EqualTo(5));
+        }
+
+        [Test]
         public void TaskMapTrivial()
         {
             var t1 = TaskMonad.Return(5);

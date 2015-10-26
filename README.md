@@ -14,6 +14,7 @@ I am aiming to cover the following:
     - `liftM2` - given two monads, apply a function to the two values obtained from the two monads and return the result inside a monad.
         - For example, given a `Task<int>` and a `Task<string>` and a `Func<int, string, bool>`, return a `Task<bool>`.
     - In C#, we need separate implementations of these monad combinators for `Task<T>` and `IEnumerable<T>` but they are identical apart from the types involved. In Haskell, only a single implementation of the monad combinators is needed because the type system is more powerful (see [Kind (type theory)](https://en.wikipedia.org/wiki/Kind_%28type_theory%29)).
+- Use of LINQ query syntax with `Task<T>` instead of `IEnumerable<T>`.
 
 ## Links
 

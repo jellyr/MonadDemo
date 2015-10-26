@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumerableCombinatorsTests.cs" />
+    <Compile Include="EnumerableMonadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskCombinatorsTests.cs" />
     <Compile Include="TaskMonadTests.cs" />
   </ItemGroup>
   <ItemGroup>
