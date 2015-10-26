@@ -68,17 +68,21 @@ namespace MonadDemo
             return tcs.Task;
         }
 
-        public static Task<T2> Select<T1, T2>(this Task<T1> task, Func<T1, T2> f)
+        public static Task<T2> Select<T1, T2>(this Task<T1> m, Func<T1, T2> f)
         {
-            return task.Map(f);
+            return m.Map(f);
         }
 
-        public static Task<T2> SelectMany<T1, T2>(this Task<T1> task, Func<T1, Task<T2>> f)
+        public static Task<T2> SelectMany<T1, T2>(this Task<T1> m, Func<T1, Task<T2>> f)
         {
-            return task.FlatMap(f);
+            return m.FlatMap(f);
         }
 
-        // TODO: add the other SelectMany overload
-        // Task<T3> SelectMany<T1, T2, T3>(this Task<T1> task, Func<T1, Task<T2>> f1, Func<T1, T2, T3> f2)
+        public static Task<T3> SelectMany<T1, T2, T3>(this Task<T1> m, Func<T1, Task<T2>> f1, Func<T1, T2, T3> f2)
+        {
+            return m.FlatMap(t1 =>
+                f1(t1).Map(t2 =>
+                    f2(t1, t2)));
+        }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonadDemo", "MonadDemo\Mona
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonadDemoTests", "MonadDemoTests\MonadDemoTests.csproj", "{DD70069E-C99F-4EB0-B1DB-E795D41B8010}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narrative", "Narrative\Narrative.csproj", "{6321C1E9-BC75-4C3C-81C9-ABD09B5730AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DD70069E-C99F-4EB0-B1DB-E795D41B8010}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD70069E-C99F-4EB0-B1DB-E795D41B8010}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD70069E-C99F-4EB0-B1DB-E795D41B8010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6321C1E9-BC75-4C3C-81C9-ABD09B5730AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6321C1E9-BC75-4C3C-81C9-ABD09B5730AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6321C1E9-BC75-4C3C-81C9-ABD09B5730AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6321C1E9-BC75-4C3C-81C9-ABD09B5730AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

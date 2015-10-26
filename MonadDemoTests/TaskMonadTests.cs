@@ -152,18 +152,56 @@ namespace MonadDemoTests
         }
 
         [Test]
-        public void TaskSelect()
+        public void TaskSelectMethodChain()
         {
+            var m = TaskMonad.Return(5).Select(Convert.ToString);
+            Assert.That(m.Result, Is.EqualTo("5"));
         }
 
         [Test]
-        public void TaskSelectMany()
+        public void TaskSelectLinq()
         {
+            var m =
+                from t in TaskMonad.Return(5)
+                select Convert.ToString(t);
+            Assert.That(m.Result, Is.EqualTo("5"));
         }
 
         [Test]
-        public void TaskSelectManyOverload()
+        public void TaskSelectManyMethodChain()
         {
+            var m = TaskMonad.Return(5).SelectMany(t1 =>
+                TaskMonad.Return(t1 * 10));
+            Assert.That(m.Result, Is.EqualTo(50));
+        }
+
+        [Test]
+        public void TaskSelectManyLinq()
+        {
+            var m =
+                from t1 in TaskMonad.Return(5)
+                from t2 in TaskMonad.Return(t1 * 10)
+                select t2;
+            Assert.That(m.Result, Is.EqualTo(50));
+        }
+
+        [Test]
+        public void TaskSelectManyOverloadMethodChain()
+        {
+            var m = TaskMonad.Return(5).SelectMany(t1 =>
+                TaskMonad.Return(10), (t1, t2) =>
+                    Convert.ToString(t1 * t2));
+            Assert.That(m.Result, Is.EqualTo("50"));
+        }
+
+        [Test]
+        public void TaskSelectManyOverloadLinq()
+        {
+            var m =
+                from t1 in TaskMonad.Return(5)
+                from t2 in TaskMonad.Return(10)
+                select Convert.ToString(t1 * t2);
+            Assert.That(m.Result, Is.EqualTo("50"));
         }
 
         private static void MimicRealisticProcessing()
