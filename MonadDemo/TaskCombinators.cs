@@ -22,8 +22,8 @@ namespace MonadDemo
         public static Task<T3> LiftM2<T1, T2, T3>(Task<T1> task1, Task<T2> task2, Func<T1, T2, T3> f)
         {
             return task1.FlatMap(a =>
-                task2.FlatMap(b =>
-                    TaskMonad.Return(f(a, b))));
+                task2.Map(b =>
+                    f(a, b)));
         }
     }
 }

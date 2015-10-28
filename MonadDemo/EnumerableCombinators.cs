@@ -20,9 +20,9 @@ namespace MonadDemo
 
         public static IEnumerable<T3> LiftM2<T1, T2, T3>(IEnumerable<T1> xs, IEnumerable<T2> ys, Func<T1, T2, T3> f)
         {
-            return xs.SelectMany(a =>
-                ys.SelectMany(b =>
-                    EnumerableMonad.Return(f(a, b))));
+            return xs.FlatMap(a =>
+                ys.Map(b =>
+                    f(a, b)));
         }
     }
 }
