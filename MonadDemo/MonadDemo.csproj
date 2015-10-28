@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumerableCombinators.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="EnumerableMonad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskCombinators.cs" />
