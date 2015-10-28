@@ -10,11 +10,14 @@ namespace MonadDemo
     {
         public static Task<IEnumerable<T>> Sequence<T>(this IEnumerable<Task<T>> ms)
         {
-            var seed = TaskMonad.Return(ImmutableList<T>.Empty);
-            var result = ms.Aggregate(seed, (acc, m) =>
-                m.FlatMap(t =>
-                    acc.FlatMap(ts =>
-                        TaskMonad.Return(ts.Add(t)))));
+            Func<Task<T>, Task<ImmutableList<T>>, Task<ImmutableList<T>>> k = (m, acc) =>
+                from t in m
+                from ts in acc
+                select ts.Insert(0, t);
+
+            var z = TaskMonad.Return(ImmutableList<T>.Empty);
+            var result = ms.FoldRight(z, k);
+
             return result.Map(immutableList => immutableList.AsEnumerable());
         }
 
