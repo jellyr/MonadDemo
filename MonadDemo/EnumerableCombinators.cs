@@ -10,9 +10,7 @@ namespace MonadDemo
         public static IEnumerable<IEnumerable<T>> Sequence<T>(this IEnumerable<IEnumerable<T>> ms)
         {
             Func<IEnumerable<T>, IEnumerable<ImmutableList<T>>, IEnumerable<ImmutableList<T>>> k = (m, acc) =>
-                from t in m
-                from ts in acc
-                select ts.Insert(0, t);
+                m.FlatMap(t => acc.Map(ts => ts.Insert(0, t)));
 
             var z = EnumerableMonad.Return(ImmutableList<T>.Empty);
             var result = ms.FoldRight(z, k);

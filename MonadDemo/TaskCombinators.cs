@@ -11,9 +11,7 @@ namespace MonadDemo
         public static Task<IEnumerable<T>> Sequence<T>(this IEnumerable<Task<T>> ms)
         {
             Func<Task<T>, Task<ImmutableList<T>>, Task<ImmutableList<T>>> k = (m, acc) =>
-                from t in m
-                from ts in acc
-                select ts.Insert(0, t);
+                m.FlatMap(t => acc.Map(ts => ts.Insert(0, t)));
 
             var z = TaskMonad.Return(ImmutableList<T>.Empty);
             var result = ms.FoldRight(z, k);
